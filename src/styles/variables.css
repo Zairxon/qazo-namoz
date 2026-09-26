@@ -1,0 +1,220 @@
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  /* ── Core surfaces (dark — primary theme, Botanical Earth) ── */
+  --bg:#1C1612;--bg-card:#241E18;--bg-elevated:#2E271F;
+  --border:rgba(255,255,255,0.12);--border-focus:#D08A52;
+  --text:#F5EDE0;--text-muted:#9C8B75;--text-hint:#6B5A45;
+  --text-elevated:#1C1612;
+
+  /* ── Accent palette ── */
+  --accent:#C4933F;--accent-hover:#C4793E;--accent-glow:rgba(196,147,63,0.25);
+  --success:#6B6F3C;--warning:#C56A2E;--danger:#B4522A;--gold:#D08A52;
+
+  /* ── UI accent palette (badges, delete buttons, secondary hovers) ── */
+  /* slate-blue было равно teal (#1E2F44) — статусы «Ожидание» (slate-blue) и
+     «В работе» (teal) визуально сливались в один цвет; развели значения. */
+  --color-terracotta:#B4522A;--color-olive:#6B6F3C;--color-slate-blue:#4A6B8A;
+  --color-burgundy:#4B2E20;--color-teal:#1E2F44;--color-mustard:#C56A2E;
+
+  /* ── Typography ── */
+  --font-base:'Inter',system-ui,sans-serif;
+  --font-display:'Unbounded','Manrope','Inter',sans-serif;
+  --text-xs:11px;--text-sm:13px;--text-base:15px;--text-md:17px;
+  --text-lg:20px;--text-xl:24px;--text-2xl:24px;--text-3xl:36px;
+  --fw-normal:400;--fw-medium:500;--fw-semibold:600;--fw-bold:700;
+
+  /* ── Spacing (8dp grid) ── */
+  --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:20px;
+  --space-6:24px;--space-8:32px;--space-10:40px;--space-12:48px;--space-16:64px;
+
+  /* ── Radius ── */
+  --radius-sm:8px;--radius-md:12px;--radius-lg:16px;--radius-xl:20px;
+  --radius-2xl:24px;--radius-full:9999px;
+
+  /* ── Shadows (layered, not flat) ── */
+  --shadow-sm:0 1px 3px #0000001a,0 1px 2px #0000000f;
+  --shadow-md:0 4px 16px #00000026,0 2px 4px #0000001a;
+  --shadow-lg:0 8px 32px #00000033,0 4px 8px #00000026;
+  --shadow-accent:0 0 0 1px var(--border-focus),0 4px 16px var(--accent-glow);
+
+  /* ── Motion ── */
+  --transition-fast:150ms cubic-bezier(.4,0,.2,1);
+  --transition-base:250ms cubic-bezier(.4,0,.2,1);
+  --transition-slow:400ms cubic-bezier(.4,0,.2,1);
+  --transition-spring:300ms cubic-bezier(.34,1.56,.64,1);
+
+  /* ── Legacy aliases — keep every existing class/inline var() reference
+     working under the new palette without touching component code ── */
+  --navy:#15100C;--blue:var(--accent);--blue2:var(--accent-hover);
+  --gold2:#E4C468;--teal:var(--success);--orange:var(--warning);--purple:#A78BFA;
+  --green:var(--success);--red:var(--danger);
+  --card:var(--bg-card);--card2:var(--bg-elevated);--border2:var(--border);
+  --muted:var(--text-muted);--text2:var(--text-muted);
+  --input-bg:var(--bg-card);--input-text:var(--text);--input-border:var(--border);
+  --tbl-head-bg:var(--bg-elevated);--tbl-row-hover:var(--bg-elevated);--tbl-stripe:var(--bg-card);
+  --tag-yes-bg:#6B6F3C26;--tag-yes-color:#A3A667;--tag-no-bg:#B4522A26;--tag-no-color:#E0937B;
+  --highlight-bg:var(--accent-glow);--highlight-border:var(--accent);--highlight-color:var(--accent);
+  --meta-box-bg:var(--bg-elevated);--day-group-bg:linear-gradient(100deg,var(--bg-elevated),var(--bg-card));
+  --dgm-bg:var(--bg-card);--modal-x-bg:var(--bg-elevated);--surface:var(--bg-card);
+  --shadow-card:var(--shadow-md);
+  --stage2-bg:#6B6F3C14;--stage2-border:#6B6F3C40;
+  color-scheme:dark only
+}
+[data-theme="dark"]{
+  --bg:#1C1612;--bg-card:#241E18;--bg-elevated:#2E271F;
+  --border:rgba(255,255,255,0.12);--border-focus:#D08A52;
+  --text:#F5EDE0;--text-muted:#9C8B75;--text-hint:#6B5A45;
+  --text-elevated:#1C1612;
+  --accent:#C4933F;--accent-glow:rgba(196,147,63,0.25);
+  color-scheme:dark only
+}
+[data-theme="light"]{
+  --bg:#FAF3E8;--bg-card:#FFFFFF;--bg-elevated:#FFF8F0;
+  --border:#E8D8C0;--border2:#F0E4CE;--border-focus:#D08A52;
+  --text:#2C1F14;--text-muted:#7A6550;--text-hint:#B8A78C;
+  --accent:#D08A52;
+  --tag-yes-bg:#EEF0E0;--tag-yes-color:#5A5E30;--tag-no-bg:#FBEBE3;--tag-no-color:#8B3F20;
+  --highlight-bg:#D08A5214;--highlight-border:#D08A5233;
+  --meta-box-bg:#F7EEE0;--day-group-bg:linear-gradient(100deg,#FDF6EC,#FAF3E8);
+  --dgm-bg:#FFFFFF;--modal-x-bg:#F7EEDD;--tbl-head-bg:#F7EEE0;--tbl-row-hover:#FDF8F0;--tbl-stripe:#FDF8F0;
+  --stage2-bg:#EEF0E0;--stage2-border:#6B6F3C30;
+  --text-elevated:var(--text);
+  color-scheme:light only
+}
+[data-theme="fire"]{
+  --bg:#0A0808;--bg-card:#150C0A;--bg-elevated:#1F1008;
+  --border:rgba(255,120,50,0.15);--border-focus:#FF6B35;
+  --text:#FFF5E8;--text-muted:#C4956A;--text-hint:#7A4A2A;
+
+  --accent:#FF6B35;--accent-hover:#FF8C5A;--accent-glow:rgba(255,107,53,0.30);
+  --success:#00C9A7;--warning:#FFD93D;--danger:#FF3366;--gold:#FFB347;
+
+  --color-teal:#00C9A7;--color-olive:#7BC67E;--color-burgundy:#C0392B;
+  --color-mustard:#FFD93D;--color-terracotta:#E74C3C;--color-slate-blue:#4ECDC4;
+
+  --text-elevated:var(--text);
+  color-scheme:dark only
+}
+/* ORYZO — warm darkroom editorial palette (Warm Cream / Walnut Shadow / Bark
+   Brown / Cork Border / Driftwood / Ember accent). Colors only — this app's
+   own surface/typography/spacing structure is unchanged. */
+[data-theme="oryzo"]{
+  --bg:#100904;--bg-card:#382416;--bg-elevated:#40372E;
+  --border:rgba(255,237,215,0.12);--border-focus:#DC5000;
+  --text:#FFEDD7;--text-muted:#6C5F51;--text-hint:#40372E;
+
+  --accent:#DC5000;--accent-hover:#C04600;--accent-glow:rgba(220,80,0,0.28);
+  --success:#6B6F3C;--warning:#C56A2E;--danger:#B4522A;--gold:#DC5000;
+
+  --color-teal:#1E2F44;--color-olive:#6B6F3C;--color-burgundy:#4B2E20;
+  --color-mustard:#C56A2E;--color-terracotta:#B4522A;--color-slate-blue:#4A6B8A;
+
+  --text-elevated:var(--text);
+  color-scheme:dark only
+}
+/* RETRO — тёплая инфографика: бежевый фон, кремовые карточки, горчичный
+   акцент, тёмно-кофейный sidebar (см. переопределения .sidebar/.sb-* в
+   global.css — sidebar здесь единственный элемент светлой темы с тёмным
+   фоном, поэтому его текст переопределён отдельно, не через --text). */
+[data-theme="retro"]{
+  --bg:#D6D3C9;--bg-card:#E8E0CE;--bg-elevated:#F5F3EC;
+  --border:rgba(74,52,42,0.15);--border-focus:#D9A032;
+  --text:#3D3833;--text-muted:#7A6F63;--text-hint:#A89C8C;
+  --text-elevated:var(--text);
+
+  --accent:#D9A032;--accent-hover:#C08D28;--accent-glow:rgba(217,160,50,0.25);
+  --success:#17838A;--warning:#D9A032;--danger:#D65A31;--gold:#D9A032;
+
+  --color-teal:#17838A;--color-olive:#8A8A3D;--color-burgundy:#4A342A;
+  --color-mustard:#D9A032;--color-terracotta:#D65A31;--color-slate-blue:#5A7A8A;
+
+  --shadow-sm:0 2px 8px rgba(74,52,42,0.10);
+  --shadow-md:0 4px 16px rgba(74,52,42,0.14);
+  --shadow-lg:0 8px 28px rgba(74,52,42,0.18);
+
+  /* Инпуты — чуть светлее карточек (почти белый), как на референсе. */
+  --input-bg:#F5F3EC;--input-text:var(--text);--input-border:var(--border);
+  color-scheme:light only
+}
+/* BUILDFLOW — фирменная тема на реальных цветах логотипа/лендинга
+   (branding/icon-master.png, branding/site-banner-reference.png): бирюзовый
+   #17838A — акцент ВЕЗДЕ, не просто у иконки, тёмная база — не серый/чёрный,
+   а глубокий тёмно-синий в тон "Build" в логотипе, горчичный и терракота —
+   ровно те же hex, что в раскраске самого значка. Раньше ни одна тема
+   приложения не была связана с ребрендом — логотип фирменный, вся остальная
+   тема оставалась "Botanical Earth" (золото/коричневый) до этой темы. */
+[data-theme="buildflow"]{
+  --bg:#0D1A22;--bg-card:#142631;--bg-elevated:#1C3541;
+  --border:rgba(23,131,138,0.20);--border-focus:#17838A;
+  --text:#EAF4F3;--text-muted:#7FA0A6;--text-hint:#4C6B71;
+  --text-elevated:var(--text);
+
+  --accent:#17838A;--accent-hover:#1FA0A8;--accent-glow:rgba(23,131,138,0.32);
+  --success:#35A373;--warning:#E8A33D;--danger:#DC5A31;--gold:#E8A33D;
+
+  --color-teal:#17838A;--color-olive:#6B8F71;--color-burgundy:#7A3320;
+  --color-mustard:#E8A33D;--color-terracotta:#DC5A31;--color-slate-blue:#4A7A94;
+
+  --shadow-sm:0 1px 3px rgba(3,10,14,.35),0 1px 2px rgba(3,10,14,.25);
+  --shadow-md:0 4px 16px rgba(3,10,14,.45),0 2px 4px rgba(3,10,14,.3);
+  --shadow-lg:0 8px 32px rgba(3,10,14,.55),0 4px 8px rgba(3,10,14,.4);
+  --shadow-accent:0 0 0 1px var(--border-focus),0 4px 20px var(--accent-glow);
+
+  --input-bg:#0F212B;--input-text:var(--text);--input-border:var(--border);
+  color-scheme:dark only
+}
+/* BLUEPRINT — премиальная «архитектор/чертёж» тема (палитра подобрана через
+   скилл ui-ux-pro-max: High-contrast dark navy + professional blue #3B82F6 +
+   deal-green success). Глубокая сине-чёрная база, бордеры с синим оттенком
+   (чертёжные линии), бирюзовый как highlight. Плюс лёгкая сетка-миллиметровка
+   на фоне контента — см. [data-theme="blueprint"] .main-area в global.css.
+   Только цвета/тени — структура приложения не меняется. */
+[data-theme="blueprint"]{
+  --bg:#0A0F1E;--bg-card:#111726;--bg-elevated:#1A2234;
+  --border:rgba(96,165,250,0.16);--border-focus:#3B82F6;
+  --text:#EAF1FB;--text-muted:#8EA2C2;--text-hint:#54637E;
+  --text-elevated:var(--text);
+
+  --accent:#3B82F6;--accent-hover:#60A5FA;--accent-glow:rgba(59,130,246,0.30);
+  --success:#22C55E;--warning:#F59E0B;--danger:#EF4444;--gold:#38BDF8;
+
+  --color-teal:#0EA5E9;--color-olive:#22C55E;--color-burgundy:#7F1D1D;
+  --color-mustard:#F59E0B;--color-terracotta:#EF4444;--color-slate-blue:#64748B;
+
+  --shadow-sm:0 1px 3px rgba(2,6,23,.45),0 1px 2px rgba(2,6,23,.30);
+  --shadow-md:0 4px 16px rgba(2,6,23,.55),0 2px 4px rgba(2,6,23,.35);
+  --shadow-lg:0 8px 32px rgba(2,6,23,.65),0 4px 8px rgba(2,6,23,.45);
+  --shadow-accent:0 0 0 1px var(--border-focus),0 4px 20px var(--accent-glow);
+
+  --input-bg:#0C1220;--input-text:var(--text);--input-border:var(--border);
+  color-scheme:dark only
+}
+/* ТЕРРА — тёплая земляная тема по палитре из 5 лент (терракота / кофейно-
+   коричневый / шалфейно-зелёный / золото / оливково-лаймовый). ОСНОВА зелёная:
+   фон с шалфейным оттенком, акцент — оливково-лаймовый зелёный; терракота —
+   danger, золото — warning/mustard, коричневый — тёмные badges. Тени в тон
+   зелёно-землистого. Только цвета — структура приложения не меняется. */
+[data-theme="terra"]{
+  --bg:#D9E0C8;--bg-card:#E9EDD9;--bg-elevated:#E0E7CE;
+  --border:rgba(58,72,38,0.20);--border-focus:#79A03E;
+  --text:#2A3018;--text-muted:#61684A;--text-hint:#969C7C;
+  --text-elevated:var(--text);
+
+  --accent:#79A03E;--accent-hover:#688A34;--accent-glow:rgba(121,160,62,0.28);
+  --success:#5E8C3C;--warning:#E0A62B;--danger:#C24428;--gold:#E0A62B;
+
+  --color-teal:#4E8A72;--color-olive:#79A03E;--color-burgundy:#6B4F3A;
+  --color-mustard:#E0A62B;--color-terracotta:#C24428;--color-slate-blue:#6E7E8C;
+
+  --shadow-sm:0 2px 8px rgba(50,60,38,0.12);
+  --shadow-md:0 4px 16px rgba(50,60,38,0.16);
+  --shadow-lg:0 8px 28px rgba(50,60,38,0.20);
+
+  --tag-yes-bg:#D8E4C2;--tag-yes-color:#456320;--tag-no-bg:#EFDACE;--tag-no-color:#8E3A20;
+  --highlight-bg:#79A03E22;--highlight-border:#79A03E4D;
+  --meta-box-bg:#DFE6CC;--day-group-bg:linear-gradient(100deg,#E5EBD4,#D9E0C8);
+  --dgm-bg:#E9EDD9;--modal-x-bg:#DDE4C9;--tbl-head-bg:#DDE4C9;--tbl-row-hover:#E2E9D2;--tbl-stripe:#E2E9D2;
+  --stage2-bg:#D8E4C2;--stage2-border:#79A03E40;
+  --input-bg:#ECF0DC;--input-text:var(--text);--input-border:var(--border);
+  color-scheme:light only
+}

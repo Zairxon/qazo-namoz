@@ -1,0 +1,8 @@
+{
+  "appId": "com.zairxon.qazonamoz",
+  "appName": "Qazo Namoz",
+  "webDir": "dist",
+  "android": {
+    "backgroundColor": "#1C1612"
+  }
+}
