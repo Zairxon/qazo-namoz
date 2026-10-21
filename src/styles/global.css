@@ -142,7 +142,7 @@ body::before {
 .kpi-sub .app-icon { font-size: 13px; }
 
 /* ── Сетка намозов (компактные карточки) ──────────────────────────────── */
-.prayer-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; }
+.prayer-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; }
 .prayer-card {
   position: relative; cursor: pointer; min-width: 0;
   background: color-mix(in srgb, var(--bg-card) 82%, transparent);
