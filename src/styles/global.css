@@ -142,7 +142,7 @@ body::before {
 .kpi-sub .app-icon { font-size: 13px; }
 
 /* ── Сетка намозов (компактные карточки) ──────────────────────────────── */
-.prayer-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; }
+.prayer-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 16px; }
 .prayer-card {
   position: relative; cursor: pointer; min-width: 0;
   background: color-mix(in srgb, var(--bg-card) 82%, transparent);
@@ -152,7 +152,7 @@ body::before {
   box-shadow: 0 1px 2px rgba(0,0,0,.12), 0 12px 30px -24px rgba(0,0,0,.5);
   transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
   animation: fadeSlideUp .4s ease-out both;
-  display: flex; flex-direction: column; gap: 5px;
+  display: flex; flex-direction: column; gap: 8px;
 }
 .prayer-card:active { transform: scale(.98); }
 .prayer-card:hover { border-color: color-mix(in srgb, var(--pc-accent) 40%, var(--border)); }
