@@ -164,7 +164,7 @@ body::before {
   color: #fff;
   box-shadow: 0 4px 10px -3px color-mix(in srgb, var(--pc-accent, var(--accent)) 70%, transparent), inset 0 1px 0 rgba(255,255,255,.38), inset 0 -1px 0 rgba(0,0,0,.18);
 }
-.prayer-ico .app-icon { filter: drop-shadow(0 1px 1px rgba(0,0,0,.3)); }
+.prayer-ico .app-icon { display: flex; line-height: 0; filter: drop-shadow(0 1px 1px rgba(0,0,0,.3)); }
 .prayer-names { flex: 1 1 auto; min-width: 0; }
 .prayer-name { font-family: var(--font-display); font-weight: var(--fw-bold); font-size: var(--text-base); color: var(--text); line-height: 1.1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .prayer-ar { font-size: 10px; color: var(--text-muted); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -173,15 +173,15 @@ body::before {
 .prayer-count.zero { color: var(--success); }
 .prayer-count-unit { font-size: var(--text-xs); color: var(--text-muted); }
 .prayer-actions { display: flex; align-items: stretch; gap: 6px; }
-/* O'qidim и «+»: одинаковая высота, на одной линии, красная рамка */
+/* O'qidim и «+»: одинаковая высота, на одной линии; O'qidim — зелёная заливка и чёрная надпись, «+» — красная рамка */
 .prayer-actions .btn-read, .prayer-actions .icon-btn {
-  height: 34px; min-height: 34px; box-sizing: border-box; margin: 0; padding-top: 0; padding-bottom: 0;
-  border: 1.5px solid #D9483B; border-radius: var(--radius-sm);
+  height: 28px; min-height: 28px; box-sizing: border-box; margin: 0; padding-top: 0; padding-bottom: 0;
+  border-radius: var(--radius-sm);
 }
-.prayer-actions .icon-btn { width: 34px; line-height: 1; padding: 0; color: #D9483B; font-size: 20px; }
+.prayer-actions .btn-read { border: 1.5px solid #5FAE5B; color: #000; background: #7CCB76; font-weight: var(--fw-bold); font-size: 12px; }
+.prayer-actions .btn-read:hover { background: #8AD684; }
+.prayer-actions .icon-btn { width: 28px; line-height: 1; padding: 0; border: 1.5px solid #D9483B; color: #D9483B; font-size: 18px; }
 .prayer-actions .icon-btn:hover { border-color: #D9483B; color: #D9483B; background: rgba(217,72,59,.12); }
-.prayer-actions .btn-read { border-color: #5FAE5B; color: #7CCB76; background: rgba(95,174,91,.14); }
-.prayer-actions .btn-read:hover { background: rgba(95,174,91,.26); }
 
 /* ── Кнопки ───────────────────────────────────────────────────────────── */
 .btn {
