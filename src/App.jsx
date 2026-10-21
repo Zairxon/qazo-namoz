@@ -8,18 +8,21 @@ import ThemeModal from './components/ThemeModal'
 import { useStore } from './lib/store'
 import { fmtLongDate } from './lib/format'
 import { handleBack } from './lib/backstack'
+import { useT } from './lib/i18n'
 
 const SCREENS = {
-  journal: { title: 'Jurnal', icon: 'history' },
-  calc: { title: 'Qazo hisoblagich', icon: 'calculator' },
+  journal: { titleKey: 'screen.journal', icon: 'history' },
+  calc: { titleKey: 'screen.calc', icon: 'calculator' },
 }
 
 export default function App() {
   const [screen, setScreen] = useState('home')  // 'home' | 'journal' | 'calc'
   const [showTheme, setShowTheme] = useState(false)
   const theme = useStore(s => s.settings.theme)
+  const t = useT()
 
   useEffect(() => { document.documentElement.setAttribute('data-theme', theme) }, [theme])
+  useEffect(() => { document.documentElement.lang = { uz: 'uz', uzc: 'uz-Cyrl', ru: 'ru', en: 'en' }[t.lang] }, [t.lang])
 
   // Аппаратная/жестовая кнопка «назад» на Android: сначала закрыть открытую
   // модалку (backstack), затем вернуться с экрана на главный, и только на
@@ -43,19 +46,19 @@ export default function App() {
     <div className="app">
       {isHome ? (
         <header className="home-header">
-          <button className="appbar-btn home-palette" title="Mavzu" onClick={() => setShowTheme(true)}><Icon name="palette" /></button>
+          <button className="appbar-btn home-palette" title={t('settings.title')} onClick={() => setShowTheme(true)}><Icon name="palette" /></button>
           <div className="home-logo"><img src="/logo.png" alt="Qazo Namoz" /></div>
           <h1 className="home-title">Qazo Namoz</h1>
           <div className="home-date">{fmtLongDate()}</div>
         </header>
       ) : (
         <header className="appbar">
-          <button className="appbar-btn" title="Orqaga" onClick={() => setScreen('home')}><Icon name="chevron-right" style={{ transform: 'rotate(180deg)' }} /></button>
+          <button className="appbar-btn" title={t('back')} onClick={() => setScreen('home')}><Icon name="chevron-right" style={{ transform: 'rotate(180deg)' }} /></button>
           <div className="appbar-titles">
-            <div className="appbar-title">{meta.title}</div>
+            <div className="appbar-title">{t(meta.titleKey)}</div>
             <div className="appbar-sub">Qazo Namoz</div>
           </div>
-          <button className="appbar-btn" title="Mavzu" onClick={() => setShowTheme(true)}><Icon name="palette" /></button>
+          <button className="appbar-btn" title={t('settings.title')} onClick={() => setShowTheme(true)}><Icon name="palette" /></button>
         </header>
       )}
 

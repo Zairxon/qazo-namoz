@@ -1,9 +1,8 @@
 import { useState } from 'react'
 import Icon from './Icon'
 import { fmtDate } from '../lib/format'
+import { useT } from '../lib/i18n'
 
-const MONTHS = ['Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'Iyun', 'Iyul', 'Avgust', 'Sentabr', 'Oktabr', 'Noyabr', 'Dekabr']
-const WD = ['Du', 'Se', 'Ch', 'Pa', 'Ju', 'Sh', 'Ya']
 
 const pad = n => String(n).padStart(2, '0')
 const iso = (y, m, d) => `${y}-${pad(m + 1)}-${pad(d)}`
@@ -11,6 +10,10 @@ const iso = (y, m, d) => `${y}-${pad(m + 1)}-${pad(d)}`
 // Календарь в стиле приложения вместо системного <input type="date">.
 // value/max — ISO 'YYYY-MM-DD'; раскрывается под полем. Тап по «Месяц год» — выбор года.
 export default function DatePicker({ value, max, onChange }) {
+  const t = useT()
+  // Название месяца в именительном падеже с заглавной (ru — отдельный список).
+  const MONTHS = t.list('monthsNom') || t.list('months').map(m => m[0].toUpperCase() + m.slice(1))
+  const WD = t.list('wdShort')
   const init = value ? new Date(value + 'T00:00:00') : new Date()
   const [open, setOpen] = useState(false)
   const [yearMode, setYearMode] = useState(false)
@@ -46,7 +49,7 @@ export default function DatePicker({ value, max, onChange }) {
   return (
     <div className="dp">
       <button type="button" className={'dp-field' + (open ? ' open' : '')} onClick={toggle}>
-        <span className={value ? '' : 'dp-ph'}>{value ? fmtDate(value) : 'Sanani tanlang'}</span>
+        <span className={value ? '' : 'dp-ph'}>{value ? fmtDate(value) : t('dp.pick')}</span>
         <Icon name="calendar" />
       </button>
 

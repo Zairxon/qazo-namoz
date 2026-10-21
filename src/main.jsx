@@ -2,8 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 
-// Шрифты бандлятся локально. UI на узбекской ЛАТИНИЦЕ (кириллические
-// глифы в этих шрифтах выглядели криво), поэтому тянем только латиницу.
+// Шрифты бандлятся локально: латиница и кириллица (для uz-кирилл и ru).
+import '@fontsource/inter/cyrillic-400.css'
+import '@fontsource/inter/cyrillic-500.css'
+import '@fontsource/inter/cyrillic-600.css'
+import '@fontsource/inter/cyrillic-700.css'
+import '@fontsource/unbounded/cyrillic-400.css'
+import '@fontsource/unbounded/cyrillic-700.css'
+import '@fontsource/unbounded/cyrillic-800.css'
 import '@fontsource/inter/latin-400.css'
 import '@fontsource/inter/latin-500.css'
 import '@fontsource/inter/latin-600.css'

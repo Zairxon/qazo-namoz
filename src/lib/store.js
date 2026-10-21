@@ -29,7 +29,7 @@ const DEFAULT_STATE = {
   counts: emptyCounts(),  // «массовые» каза (из калькулятора / ручного ввода)
   entries: [],            // конкретные отмеченные намозы { id, prayer, date, qasr, note, createdAt }
   journal: [],            // прочитанные каза { id, prayer, date, qasr, note, readAt, kind }
-  settings: { theme: 'dark' },
+  settings: { theme: 'dark', lang: 'uz' },
 }
 
 function load() {
@@ -168,6 +168,11 @@ export function undoJournal(id) {
 // Удалить запись журнала насовсем (не возвращая намоз в «осталось»).
 export function deleteJournal(id) {
   state = { ...state, journal: state.journal.filter(x => x.id !== id) }
+  emit()
+}
+
+export function setLang(lang) {
+  state = { ...state, settings: { ...state.settings, lang } }
   emit()
 }
 

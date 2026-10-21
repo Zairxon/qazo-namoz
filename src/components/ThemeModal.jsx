@@ -1,11 +1,12 @@
 import Modal from './Modal'
-import { useStore, setTheme } from '../lib/store'
+import { useStore, setTheme, setLang } from '../lib/store'
+import { useT, LANGS } from '../lib/i18n'
 
 // Темы наследуются из variables.css (те же, что в BuildFlow). Точка —
 // это акцент темы; фон точки — её базовый фон.
 const THEMES = [
   { id: 'dark',      label: 'Botanical',  dot: '#C4933F', bg: '#241E18' },
-  { id: 'light',     label: 'Yorug‘',     dot: '#D08A52', bg: '#FFF8F0' },
+  { id: 'light',     label: null, labelKey: 'theme.light',     dot: '#D08A52', bg: '#FFF8F0' },
   { id: 'buildflow', label: 'BuildFlow',  dot: '#17838A', bg: '#142631' },
   { id: 'oryzo',     label: 'Oryzo',      dot: '#DC5000', bg: '#382416' },
   { id: 'blueprint', label: 'Blueprint',  dot: '#3B82F6', bg: '#111726' },
@@ -16,17 +17,28 @@ const THEMES = [
 
 export default function ThemeModal({ onClose }) {
   const theme = useStore(s => s.settings.theme)
+  const t = useT()
   return (
-    <Modal title="Mavzu (tema)" onClose={onClose}>
+    <Modal title={t('settings.title')} onClose={onClose}>
+      <div className="fld"><label>{t('lang.title')}</label></div>
       <div className="theme-list">
-        {THEMES.map(t => (
+        {LANGS.map(l => (
+          <div key={l.id} className={'theme-item' + (t.lang === l.id ? ' act' : '')} onClick={() => setLang(l.id)}>
+            <span className="theme-label">{l.label}</span>
+          </div>
+        ))}
+      </div>
+
+      <div className="fld" style={{ marginTop: 16 }}><label>{t('theme.title')}</label></div>
+      <div className="theme-list">
+        {THEMES.map(th => (
           <div
-            key={t.id}
-            className={'theme-item' + (theme === t.id ? ' act' : '')}
-            onClick={() => setTheme(t.id)}
+            key={th.id}
+            className={'theme-item' + (theme === th.id ? ' act' : '')}
+            onClick={() => setTheme(th.id)}
           >
-            <span className="theme-dot" style={{ background: t.dot, borderColor: t.bg }} />
-            <span className="theme-label">{t.label}</span>
+            <span className="theme-dot" style={{ background: th.dot, borderColor: th.bg }} />
+            <span className="theme-label">{th.labelKey ? t(th.labelKey) : th.label}</span>
           </div>
         ))}
       </div>

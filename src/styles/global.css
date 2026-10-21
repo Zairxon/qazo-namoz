@@ -91,7 +91,7 @@ body::before {
   -webkit-text-stroke: 0.9px currentColor;
   text-shadow: 0 2px 10px rgba(0,0,0,.28);
 }
-.home-date { font-size: var(--text-md); font-weight: var(--fw-medium); color: var(--text-muted); text-transform: capitalize; margin-top: 9px; }
+.home-date { font-size: var(--text-md); font-weight: var(--fw-medium); color: var(--text-muted); margin-top: 9px; }
 .home-header .home-palette { position: absolute; top: 8px; right: 0; }
 
 /* ── Шапка экранов (назад + заголовок) ────────────────────────────────── */
@@ -127,7 +127,7 @@ body::before {
   background: color-mix(in srgb, var(--bg-card) 80%, transparent);
   backdrop-filter: blur(10px);
   border: 1px solid var(--border); border-radius: var(--radius-lg);
-  padding: 12px 13px; box-shadow: var(--shadow-md);
+  padding: 9px 11px; box-shadow: var(--shadow-md);
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
   animation: fadeSlideUp .4s ease-out both;
 }
@@ -142,24 +142,24 @@ body::before {
 .kpi-sub .app-icon { font-size: 13px; }
 
 /* ── Сетка намозов (компактные карточки) ──────────────────────────────── */
-.prayer-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+.prayer-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; }
 .prayer-card {
   position: relative; cursor: pointer; min-width: 0;
   background: color-mix(in srgb, var(--bg-card) 82%, transparent);
   backdrop-filter: blur(10px);
   border: 1px solid var(--border); border-left: 3px solid var(--pc-accent, var(--accent));
-  border-radius: var(--radius-lg); padding: 9px 10px;
+  border-radius: var(--radius-lg); padding: 7px 9px;
   box-shadow: 0 1px 2px rgba(0,0,0,.12), 0 12px 30px -24px rgba(0,0,0,.5);
   transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
   animation: fadeSlideUp .4s ease-out both;
-  display: flex; flex-direction: column; gap: 7px;
+  display: flex; flex-direction: column; gap: 5px;
 }
 .prayer-card:active { transform: scale(.98); }
 .prayer-card:hover { border-color: color-mix(in srgb, var(--pc-accent) 40%, var(--border)); }
 .prayer-card-head { display: flex; align-items: center; gap: 8px; min-width: 0; }
 .prayer-ico {
-  width: 34px; height: 34px; border-radius: 11px; flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center; font-size: 19px;
+  width: 30px; height: 30px; border-radius: 10px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: 17px;
   background: linear-gradient(145deg, color-mix(in srgb, var(--pc-accent, var(--accent)) 88%, #fff), color-mix(in srgb, var(--pc-accent, var(--accent)) 62%, #000));
   color: #fff;
   box-shadow: 0 4px 10px -3px color-mix(in srgb, var(--pc-accent, var(--accent)) 70%, transparent), inset 0 1px 0 rgba(255,255,255,.38), inset 0 -1px 0 rgba(0,0,0,.18);
@@ -169,18 +169,18 @@ body::before {
 .prayer-name { font-family: var(--font-display); font-weight: var(--fw-bold); font-size: var(--text-base); color: var(--text); line-height: 1.1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .prayer-ar { font-size: 10px; color: var(--text-muted); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .prayer-count-row { display: flex; align-items: baseline; gap: 5px; }
-.prayer-count { font-family: var(--font-display); font-weight: var(--fw-bold); font-size: 25px; line-height: 1; color: var(--text); font-variant-numeric: tabular-nums; }
+.prayer-count { font-family: var(--font-display); font-weight: var(--fw-bold); font-size: 22px; line-height: 1; color: var(--text); font-variant-numeric: tabular-nums; }
 .prayer-count.zero { color: var(--success); }
 .prayer-count-unit { font-size: var(--text-xs); color: var(--text-muted); }
 .prayer-actions { display: flex; align-items: stretch; gap: 6px; }
 /* O'qidim и «+»: одинаковая высота, на одной линии; O'qidim — зелёная заливка и чёрная надпись, «+» — красная рамка */
 .prayer-actions .btn-read, .prayer-actions .icon-btn {
-  height: 28px; min-height: 28px; box-sizing: border-box; margin: 0; padding-top: 0; padding-bottom: 0;
+  height: 26px; min-height: 26px; box-sizing: border-box; margin: 0; padding-top: 0; padding-bottom: 0;
   border-radius: var(--radius-sm);
 }
-.prayer-actions .btn-read { border: 1.5px solid #5FAE5B; color: #000; background: rgba(124,203,118,.5); font-weight: var(--fw-bold); font-size: 12px; }
+.prayer-actions .btn-read { border: 1.5px solid #5FAE5B; color: #000; background: rgba(124,203,118,.5); font-weight: var(--fw-bold); font-size: 11.5px; }
 .prayer-actions .btn-read:hover { background: rgba(124,203,118,.65); }
-.prayer-actions .icon-btn { width: 28px; line-height: 1; padding: 0; border: 1.5px solid #D9483B; color: #D9483B; font-size: 18px; }
+.prayer-actions .icon-btn { width: 26px; line-height: 1; padding: 0; border: 1.5px solid #D9483B; color: #D9483B; font-size: 18px; }
 .prayer-actions .icon-btn:hover { border-color: #D9483B; color: #D9483B; background: rgba(217,72,59,.12); }
 
 /* ── Кнопки ───────────────────────────────────────────────────────────── */
@@ -222,7 +222,7 @@ body::before {
   display: flex; align-items: center; gap: 10px;
   background: var(--bg-card); border: 1px solid var(--border);
   border-left: 3px solid var(--pc-accent, var(--accent));
-  border-radius: var(--radius-md); padding: 9px 11px;
+  border-radius: var(--radius-md); padding: 7px 10px;
 }
 .entry-ico {
   width: 32px; height: 32px; border-radius: 9px; flex-shrink: 0;
@@ -238,13 +238,13 @@ body::before {
 .fld { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
 .fld > label { font-size: var(--text-xs); font-weight: var(--fw-semibold); color: var(--text-muted); text-transform: uppercase; letter-spacing: .05em; }
 .fld input, .fld select {
-  height: 44px; border: 1px solid var(--border); border-radius: var(--radius-md);
+  height: 40px; border: 1px solid var(--border); border-radius: var(--radius-md);
   padding: 0 13px; font-size: 16px; color: var(--input-text); background: var(--input-bg);
   font-family: var(--font-base); outline: none; transition: var(--transition-fast);
 }
 .fld input:focus, .fld select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
 
-.switch-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 11px 13px; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--bg-card); margin-bottom: 14px; }
+.switch-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 9px 11px; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--bg-card); margin-bottom: 12px; }
 .switch-row.disabled { opacity: .45; }
 .switch-label { font-size: var(--text-sm); font-weight: var(--fw-semibold); color: var(--text); }
 .switch-hint { font-size: 10.5px; color: var(--text-muted); margin-top: 2px; }
@@ -279,14 +279,14 @@ body::before {
 .empty .app-icon { font-size: 46px; opacity: .3; }
 .empty-title { font-family: var(--font-display); font-weight: var(--fw-semibold); font-size: var(--text-md); color: var(--text); }
 .empty p { margin: 0; font-size: var(--text-sm); max-width: 270px; line-height: 1.5; }
-.info-card { display: flex; gap: 9px; padding: 11px 13px; margin-bottom: 14px; background: var(--highlight-bg); border: 1px solid var(--highlight-border); border-radius: var(--radius-md); font-size: var(--text-sm); color: var(--text-muted); line-height: 1.5; }
+.info-card { display: flex; gap: 9px; padding: 9px 11px; margin-bottom: 12px; background: var(--highlight-bg); border: 1px solid var(--highlight-border); border-radius: var(--radius-md); font-size: var(--text-sm); color: var(--text-muted); line-height: 1.5; }
 .info-card .app-icon { color: var(--accent); font-size: 18px; flex-shrink: 0; margin-top: 1px; }
 .info-card b { color: var(--text); }
 
 /* ── Калькулятор ──────────────────────────────────────────────────────── */
 .calc-result { display: flex; flex-direction: column; gap: 7px; margin-top: 6px; }
-.calc-row { display: flex; align-items: center; gap: 11px; padding: 10px 12px; border-radius: var(--radius-md); border: 1px solid var(--border); background: var(--bg-card); }
-.calc-row .prayer-ico { width: 30px; height: 30px; font-size: 16px; border-radius: 9px; }
+.calc-row { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: var(--radius-md); border: 1px solid var(--border); background: var(--bg-card); }
+.calc-row .prayer-ico { width: 28px; height: 28px; font-size: 15px; border-radius: 9px; }
 .calc-row-name { flex: 1 1 auto; font-weight: var(--fw-semibold); font-size: var(--text-sm); }
 .calc-row-val { font-family: var(--font-display); font-weight: var(--fw-bold); font-size: var(--text-md); font-variant-numeric: tabular-nums; }
 .calc-total { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; border-radius: var(--radius-md); background: color-mix(in srgb, var(--accent) 12%, transparent); border: 1px solid var(--highlight-border); font-family: var(--font-display); font-weight: var(--fw-bold); margin-top: 5px; font-size: var(--text-sm); }
@@ -297,7 +297,7 @@ body::before {
 
 /* ── Темы ─────────────────────────────────────────────────────────────── */
 .theme-list { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
-.theme-item { display: flex; align-items: center; gap: 9px; padding: 11px; cursor: pointer; border-radius: var(--radius-md); border: 1.5px solid var(--border); background: var(--bg-card); transition: var(--transition-fast); -webkit-tap-highlight-color: transparent; }
+.theme-item { display: flex; align-items: center; gap: 9px; padding: 9px; cursor: pointer; border-radius: var(--radius-md); border: 1.5px solid var(--border); background: var(--bg-card); transition: var(--transition-fast); -webkit-tap-highlight-color: transparent; }
 .theme-item.act { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-glow); }
 .theme-dot { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; border: 2px solid rgba(255,255,255,.3); }
 .theme-label { font-size: var(--text-sm); font-weight: var(--fw-semibold); color: var(--text); }
@@ -322,7 +322,7 @@ body::before {
 
 /* ── Календарь (DatePicker) ───────────────────────────────────────────── */
 .dp-field {
-  width: 100%; height: 44px; display: flex; align-items: center; justify-content: space-between;
+  width: 100%; height: 40px; display: flex; align-items: center; justify-content: space-between;
   padding: 0 13px; font-size: 16px; font-family: var(--font-base); color: var(--input-text);
   background: var(--input-bg); border: 1px solid var(--border); border-radius: var(--radius-md);
   cursor: pointer; outline: none; transition: var(--transition-fast);
@@ -348,3 +348,4 @@ body::before {
 .dp-years { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; max-height: 220px; overflow-y: auto; }
 .dp-year { height: 38px; border: 1px solid transparent; border-radius: var(--radius-md); background: transparent; color: var(--text); font-family: var(--font-base); font-size: var(--text-base); cursor: pointer; }
 .dp-year.sel { background: var(--accent); color: var(--text-elevated); font-weight: var(--fw-bold); }
+.home-date::first-letter { text-transform: uppercase; }

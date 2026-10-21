@@ -3,6 +3,7 @@ import Icon from '../components/Icon'
 import DatePicker from '../components/DatePicker'
 import { PRAYERS, addCounts } from '../lib/store'
 import { daysBetween, fmtDate, fmtNum } from '../lib/format'
+import { useT, rich } from '../lib/i18n'
 
 const todayISO = () => new Date().toISOString().slice(0, 10)
 
@@ -17,6 +18,7 @@ function addYears(iso, years) {
 // Калькулятор qazo по датам: дни между балоғат и началом регулярного намаза;
 // каждый пропущенный день = по одному каждого из 5 намозов + Vitr.
 export default function Calculator() {
+  const t = useT()
   const [birth, setBirth] = useState('')
   const [baligh, setBaligh] = useState(12)
   const [start, setStart] = useState('')
@@ -37,26 +39,26 @@ export default function Calculator() {
     <div className="page">
       <div className="info-card">
         <Icon name="info" />
-        <span>Namoz <b>balog‘at</b>dan farz bo‘ladi. Balog‘at bilan namozni doimiy boshlagan kun orasidagi har bir kun uchun — 5 vaqt namoz va <b>Vitr</b> qazo bo‘ladi.</span>
+        <span>{rich(t('calc.info'))}</span>
       </div>
 
       <div className="fld">
-        <label>Tug‘ilgan sana</label>
+        <label>{t('calc.birth')}</label>
         <DatePicker value={birth} max={todayISO()} onChange={v => { setBirth(v); setAdded(false) }} />
       </div>
 
       <div className="fld">
-        <label>Balog‘at yoshi (odatda 12–15)</label>
+        <label>{t('calc.baligh')}</label>
         <input type="number" min="7" max="20" value={baligh} onChange={e => { setBaligh(e.target.value); setAdded(false) }} />
       </div>
 
       <div className="info-card" style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}>
         <Icon name="calendar" />
-        <span>Namoz farz bo‘lgan sana: <b>{obligation ? fmtDate(obligation) : '— tug‘ilgan sanani kiriting'}</b></span>
+        <span>{obligation ? rich(t('calc.obligation', { d: fmtDate(obligation) })) : <>{t('calc.obligation', { d: '' }).split('<b>')[0]}<b>{t('calc.obligationEmpty')}</b></>}</span>
       </div>
 
       <div className="fld">
-        <label>Namozni doimiy boshlagan sana</label>
+        <label>{t('calc.start')}</label>
         <DatePicker value={start} max={todayISO()} onChange={v => { setStart(v); setAdded(false) }} />
       </div>
 
@@ -64,31 +66,31 @@ export default function Calculator() {
         <>
           <div className="info-card" style={{ marginTop: 4 }}>
             <Icon name="clock" />
-            <span>O‘tkazilgan davr: <b>{fmtNum(days)} kun</b> (≈ {(days / 365.25).toFixed(1)} yil)</span>
+            <span>{rich(t('calc.period', { n: fmtNum(days), y: (days / 365.25).toFixed(1) }))}</span>
           </div>
 
           <div className="calc-result">
             {PRAYERS.map(p => (
               <div key={p.id} className="calc-row" style={{ '--pc-accent': p.color }}>
                 <div className="prayer-ico"><Icon name={p.icon} /></div>
-                <div className="calc-row-name">{p.name} <span style={{ color: 'var(--text-muted)', fontWeight: 400 }}>· {p.arabic}</span></div>
+                <div className="calc-row-name">{t('p.' + p.id)} <span style={{ color: 'var(--text-muted)', fontWeight: 400 }}>· {t('pa.' + p.id)}</span></div>
                 <div className="calc-row-val" style={{ color: p.color }}>{fmtNum(perPrayer)}</div>
               </div>
             ))}
             <div className="calc-total">
-              <span>Jami qazo namoz</span>
+              <span>{t('calc.total')}</span>
               <span className="calc-total-val">{fmtNum(total)}</span>
             </div>
           </div>
 
           <div className="spacer-lg" />
           {added ? (
-            <div className="btn btn-read btn-block" style={{ cursor: 'default' }}><Icon name="circle-check" /> Hisobga qo‘shildi</div>
+            <div className="btn btn-read btn-block" style={{ cursor: 'default' }}><Icon name="circle-check" /> {t('calc.added')}</div>
           ) : (
-            <button className="btn btn-primary btn-block" onClick={apply}><Icon name="plus" /> Hisoblab «Namozlar»ga qo‘shish</button>
+            <button className="btn btn-primary btn-block" onClick={apply}><Icon name="plus" /> {t('calc.apply')}</button>
           )}
           <p style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', textAlign: 'center', marginTop: 10, lineHeight: 1.5 }}>
-            Hayz/nifos kunlari (ayollar uchun) va tug‘ilish sanasi aniqligini o‘zingiz hisobga oling — bu taxminiy hisob-kitob.
+            {t('calc.note')}
           </p>
         </>
       )}

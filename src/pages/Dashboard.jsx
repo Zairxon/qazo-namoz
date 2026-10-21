@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Icon from '../components/Icon'
 import PrayerDetailModal from '../components/PrayerDetailModal'
 import AddEntryModal from '../components/AddEntryModal'
+import { useT } from '../lib/i18n'
 import {
   useStore, PRAYERS, remainingByPrayer, totalRemaining,
   readEntry, readOneFromCount,
@@ -21,6 +22,7 @@ function readOne(state, prayerId) {
 
 export default function Dashboard({ onOpenCalc, onOpenJournal }) {
   const state = useStore()
+  const t = useT()
   const total = totalRemaining(state)
   const readCount = state.journal.length
   const [detail, setDetail] = useState(null)  // id намоза для модалки деталей
@@ -33,23 +35,23 @@ export default function Dashboard({ onOpenCalc, onOpenJournal }) {
         <div className="kpi-card" style={{ '--accent-bar': 'var(--accent)' }} onClick={onOpenCalc}>
           <div className="kpi-top">
             <div className="kpi-ico" style={{ background: 'color-mix(in srgb, var(--accent) 12%, transparent)', color: 'var(--accent)' }}><Icon name="pray" /></div>
-            <div className="kpi-lbl">Jami qolgan</div>
+            <div className="kpi-lbl">{t('kpi.total')}</div>
           </div>
           <div className="kpi-val">{total}</div>
-          <div className="kpi-sub"><Icon name="calculator" /> Hisoblagich →</div>
+          <div className="kpi-sub"><Icon name="calculator" /> {t('kpi.calc')}</div>
         </div>
         <div className="kpi-card" style={{ '--accent-bar': 'var(--success)' }} onClick={onOpenJournal}>
           <div className="kpi-top">
             <div className="kpi-ico" style={{ background: 'color-mix(in srgb, var(--success) 14%, transparent)', color: 'var(--success)' }}><Icon name="circle-check" /></div>
-            <div className="kpi-lbl">O‘qilgan</div>
+            <div className="kpi-lbl">{t('kpi.read')}</div>
           </div>
           <div className="kpi-val">{readCount}</div>
-          <div className="kpi-sub"><Icon name="history" /> Jurnal →</div>
+          <div className="kpi-sub"><Icon name="history" /> {t('kpi.journal')}</div>
         </div>
       </div>
 
       <div className="section-header">
-        <h2 className="section-title"><Icon name="mosque" /> Namozlar</h2>
+        <h2 className="section-title"><Icon name="mosque" /> {t('prayers.title')}</h2>
       </div>
 
       <div className="prayer-grid">
@@ -60,19 +62,19 @@ export default function Dashboard({ onOpenCalc, onOpenJournal }) {
               <div className="prayer-card-head">
                 <div className="prayer-ico"><Icon name={p.icon} /></div>
                 <div className="prayer-names">
-                  <div className="prayer-name">{p.name}</div>
-                  <div className="prayer-ar">{p.arabic}</div>
+                  <div className="prayer-name">{t('p.' + p.id)}</div>
+                  <div className="prayer-ar">{t('pa.' + p.id)}</div>
                 </div>
               </div>
               <div className="prayer-count-row">
                 <span className={'prayer-count' + (rem === 0 ? ' zero' : '')}>{rem === 0 ? '✓' : rem}</span>
-                <span className="prayer-count-unit">{rem === 0 ? 'qolmadi' : 'qoldi'}</span>
+                <span className="prayer-count-unit">{rem === 0 ? t('none') : t('left')}</span>
               </div>
               <div className="prayer-actions" onClick={e => e.stopPropagation()}>
                 <button className="btn btn-read btn-sm" disabled={rem === 0} onClick={() => readOne(state, p.id)}>
-                  <Icon name="check" /> O‘qidim
+                  <Icon name="check" /> {t('read')}
                 </button>
-                <button className="icon-btn step" title="Qazo qo‘shish" onClick={() => setAddFor(p.id)}>+</button>
+                <button className="icon-btn step" title={t('add.title')} onClick={() => setAddFor(p.id)}>+</button>
               </div>
             </div>
           )
