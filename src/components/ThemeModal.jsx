@@ -1,6 +1,7 @@
 import Modal from './Modal'
 import { useStore, setTheme, setLang } from '../lib/store'
 import { useT, LANGS } from '../lib/i18n'
+import { APP_VERSION, openUrl } from '../lib/update'
 
 // Темы наследуются из variables.css (те же, что в BuildFlow). Точка —
 // это акцент темы; фон точки — её базовый фон.
@@ -15,7 +16,7 @@ const THEMES = [
   { id: 'retro',     label: 'Retro',      dot: '#D9A032', bg: '#E8E0CE' },
 ]
 
-export default function ThemeModal({ onClose }) {
+export default function ThemeModal({ onClose, update }) {
   const theme = useStore(s => s.settings.theme)
   const t = useT()
   return (
@@ -41,6 +42,11 @@ export default function ThemeModal({ onClose }) {
             <span className="theme-label">{th.labelKey ? t(th.labelKey) : th.label}</span>
           </div>
         ))}
+      </div>
+
+      <div className="ver-row">
+        <span>{t('version')} {APP_VERSION}</span>
+        {update && <button className="update-btn" onClick={() => openUrl(update.url)}>{t('update.avail')} · v{update.version} — {t('update.btn')}</button>}
       </div>
     </Modal>
   )

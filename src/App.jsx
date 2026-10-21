@@ -9,6 +9,7 @@ import { useStore } from './lib/store'
 import { fmtLongDate } from './lib/format'
 import { handleBack } from './lib/backstack'
 import { useT } from './lib/i18n'
+import { useUpdate, openUrl } from './lib/update'
 
 const SCREENS = {
   journal: { titleKey: 'screen.journal', icon: 'history' },
@@ -20,6 +21,8 @@ export default function App() {
   const [showTheme, setShowTheme] = useState(false)
   const theme = useStore(s => s.settings.theme)
   const t = useT()
+  const update = useUpdate()
+  const [hideUpdate, setHideUpdate] = useState(false)
 
   useEffect(() => { document.documentElement.setAttribute('data-theme', theme) }, [theme])
   useEffect(() => { document.documentElement.lang = { uz: 'uz', uzc: 'uz-Cyrl', ru: 'ru', en: 'en' }[t.lang] }, [t.lang])
@@ -44,6 +47,14 @@ export default function App() {
 
   return (
     <div className="app">
+      {update && !hideUpdate && (
+        <div className="update-bar">
+          <Icon name="sparkles" />
+          <span className="update-text">{t('update.avail')} · v{update.version}</span>
+          <button className="update-btn" onClick={() => openUrl(update.url)}>{t('update.btn')}</button>
+          <button className="update-x" title={t('close')} onClick={() => setHideUpdate(true)}><Icon name="x" /></button>
+        </div>
+      )}
       {isHome ? (
         <header className="home-header">
           <button className="appbar-btn home-palette" title={t('settings.title')} onClick={() => setShowTheme(true)}><Icon name="palette" /></button>
@@ -66,7 +77,7 @@ export default function App() {
       {screen === 'journal' && <Journal />}
       {screen === 'calc' && <Calculator />}
 
-      {showTheme && <ThemeModal onClose={() => setShowTheme(false)} />}
+      {showTheme && <ThemeModal update={update} onClose={() => setShowTheme(false)} />}
     </div>
   )
 }

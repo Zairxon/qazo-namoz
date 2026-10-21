@@ -13,7 +13,7 @@ export const LANGS = [
 const DICT = {
   uz: {
     'screen.journal': 'Jurnal', 'screen.calc': 'Qazo hisoblagich', back: 'Orqaga', close: 'Yopish',
-    'settings.title': 'Mavzu va til', 'theme.title': 'Mavzu', 'theme.light': 'Yorug‘', 'lang.title': 'Til',
+    'settings.title': 'Mavzu va til', version: 'Versiya', 'update.avail': 'Yangilanish bor', 'update.btn': 'Yangilash', 'theme.title': 'Mavzu', 'theme.light': 'Yorug‘', 'lang.title': 'Til',
     'kpi.total': 'Jami qolgan', 'kpi.calc': 'Hisoblagich →', 'kpi.read': 'O‘qilgan', 'kpi.journal': 'Jurnal →',
     'prayers.title': 'Namozlar', left: 'qoldi', none: 'qolmadi', read: 'O‘qidim', 'add.title': 'Qazo qo‘shish',
     'add.heading': '{name} — qazo qo‘shish', cancel: 'Bekor', 'add.btn': 'Qo‘shish', 'add.date': 'Qachon o‘tkazilgan (sana)',
@@ -38,7 +38,7 @@ const DICT = {
   },
   uzc: {
     'screen.journal': 'Журнал', 'screen.calc': 'Қазо ҳисоблагич', back: 'Орқага', close: 'Ёпиш',
-    'settings.title': 'Мавзу ва тил', 'theme.title': 'Мавзу', 'theme.light': 'Ёруғ', 'lang.title': 'Тил',
+    'settings.title': 'Мавзу ва тил', version: 'Версия', 'update.avail': 'Янгиланиш бор', 'update.btn': 'Янгилаш', 'theme.title': 'Мавзу', 'theme.light': 'Ёруғ', 'lang.title': 'Тил',
     'kpi.total': 'Жами қолган', 'kpi.calc': 'Ҳисоблагич →', 'kpi.read': 'Ўқилган', 'kpi.journal': 'Журнал →',
     'prayers.title': 'Намозлар', left: 'қолди', none: 'қолмади', read: 'Ўқидим', 'add.title': 'Қазо қўшиш',
     'add.heading': '{name} — қазо қўшиш', cancel: 'Бекор', 'add.btn': 'Қўшиш', 'add.date': 'Қачон ўтказилган (сана)',
@@ -63,7 +63,7 @@ const DICT = {
   },
   ru: {
     'screen.journal': 'Журнал', 'screen.calc': 'Калькулятор каза', back: 'Назад', close: 'Закрыть',
-    'settings.title': 'Тема и язык', 'theme.title': 'Тема', 'theme.light': 'Светлая', 'lang.title': 'Язык',
+    'settings.title': 'Тема и язык', version: 'Версия', 'update.avail': 'Есть обновление', 'update.btn': 'Обновить', 'theme.title': 'Тема', 'theme.light': 'Светлая', 'lang.title': 'Язык',
     'kpi.total': 'Осталось', 'kpi.calc': 'Калькулятор →', 'kpi.read': 'Прочитано', 'kpi.journal': 'Журнал →',
     'prayers.title': 'Намазы', left: 'осталось', none: 'не осталось', read: 'Прочитал', 'add.title': 'Добавить каза',
     'add.heading': '{name} — добавить каза', cancel: 'Отмена', 'add.btn': 'Добавить', 'add.date': 'Когда пропущен (дата)',
@@ -89,7 +89,7 @@ const DICT = {
   },
   en: {
     'screen.journal': 'Journal', 'screen.calc': 'Qaza calculator', back: 'Back', close: 'Close',
-    'settings.title': 'Theme & language', 'theme.title': 'Theme', 'theme.light': 'Light', 'lang.title': 'Language',
+    'settings.title': 'Theme & language', version: 'Version', 'update.avail': 'Update available', 'update.btn': 'Update', 'theme.title': 'Theme', 'theme.light': 'Light', 'lang.title': 'Language',
     'kpi.total': 'Total left', 'kpi.calc': 'Calculator →', 'kpi.read': 'Prayed', 'kpi.journal': 'Journal →',
     'prayers.title': 'Prayers', left: 'left', none: 'none left', read: 'Prayed', 'add.title': 'Add qaza',
     'add.heading': '{name} — add qaza', cancel: 'Cancel', 'add.btn': 'Add', 'add.date': 'Date missed',
