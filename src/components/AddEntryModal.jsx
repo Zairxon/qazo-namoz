@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Modal from './Modal'
 import Icon from './Icon'
+import DatePicker from './DatePicker'
 import { PRAYER_MAP, QASR_ELIGIBLE, addEntry } from '../lib/store'
 
 const todayISO = () => new Date().toISOString().slice(0, 10)
@@ -28,7 +29,7 @@ export default function AddEntryModal({ prayer, onClose }) {
     >
       <div className="fld">
         <label>Qachon o‘tkazilgan (sana)</label>
-        <input type="date" value={date} max={todayISO()} onChange={e => setDate(e.target.value)} />
+        <DatePicker value={date} max={todayISO()} onChange={setDate} />
       </div>
 
       <div className={'switch-row' + (qasrOk ? '' : ' disabled')} style={{ '--pc-accent': p.color }} onClick={() => qasrOk && setQasr(v => !v)}>

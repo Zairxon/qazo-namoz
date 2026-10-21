@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import Icon from '../components/Icon'
+import DatePicker from '../components/DatePicker'
 import { PRAYERS, addCounts } from '../lib/store'
 import { daysBetween, fmtDate, fmtNum } from '../lib/format'
 
@@ -41,7 +42,7 @@ export default function Calculator() {
 
       <div className="fld">
         <label>Tug‘ilgan sana</label>
-        <input type="date" value={birth} max={todayISO()} onChange={e => { setBirth(e.target.value); setAdded(false) }} />
+        <DatePicker value={birth} max={todayISO()} onChange={v => { setBirth(v); setAdded(false) }} />
       </div>
 
       <div className="fld">
@@ -56,7 +57,7 @@ export default function Calculator() {
 
       <div className="fld">
         <label>Namozni doimiy boshlagan sana</label>
-        <input type="date" value={start} max={todayISO()} onChange={e => { setStart(e.target.value); setAdded(false) }} />
+        <DatePicker value={start} max={todayISO()} onChange={v => { setStart(v); setAdded(false) }} />
       </div>
 
       {days > 0 && (
