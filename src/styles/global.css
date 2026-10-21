@@ -158,10 +158,13 @@ body::before {
 .prayer-card:hover { border-color: color-mix(in srgb, var(--pc-accent) 40%, var(--border)); }
 .prayer-card-head { display: flex; align-items: center; gap: 8px; min-width: 0; }
 .prayer-ico {
-  width: 30px; height: 30px; border-radius: 9px; flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center; font-size: 16px;
-  background: color-mix(in srgb, var(--pc-accent, var(--accent)) 16%, transparent); color: var(--pc-accent, var(--accent));
+  width: 34px; height: 34px; border-radius: 11px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: 19px;
+  background: linear-gradient(145deg, color-mix(in srgb, var(--pc-accent, var(--accent)) 88%, #fff), color-mix(in srgb, var(--pc-accent, var(--accent)) 62%, #000));
+  color: #fff;
+  box-shadow: 0 4px 10px -3px color-mix(in srgb, var(--pc-accent, var(--accent)) 70%, transparent), inset 0 1px 0 rgba(255,255,255,.38), inset 0 -1px 0 rgba(0,0,0,.18);
 }
+.prayer-ico .app-icon { filter: drop-shadow(0 1px 1px rgba(0,0,0,.3)); }
 .prayer-names { flex: 1 1 auto; min-width: 0; }
 .prayer-name { font-family: var(--font-display); font-weight: var(--fw-bold); font-size: var(--text-base); color: var(--text); line-height: 1.1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .prayer-ar { font-size: 10px; color: var(--text-muted); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -169,7 +172,15 @@ body::before {
 .prayer-count { font-family: var(--font-display); font-weight: var(--fw-bold); font-size: 25px; line-height: 1; color: var(--text); font-variant-numeric: tabular-nums; }
 .prayer-count.zero { color: var(--success); }
 .prayer-count-unit { font-size: var(--text-xs); color: var(--text-muted); }
-.prayer-actions { display: flex; gap: 6px; }
+.prayer-actions { display: flex; align-items: stretch; gap: 6px; }
+/* O'qidim и «+»: одинаковая высота, на одной линии, красная рамка */
+.prayer-actions .btn-read, .prayer-actions .icon-btn {
+  height: 34px; min-height: 34px; box-sizing: border-box; margin: 0; padding-top: 0; padding-bottom: 0;
+  border: 1.5px solid #D9483B; border-radius: var(--radius-sm);
+}
+.prayer-actions .icon-btn { width: 34px; line-height: 1; padding: 0; color: #D9483B; font-size: 20px; }
+.prayer-actions .icon-btn:hover { border-color: #D9483B; color: #D9483B; background: rgba(217,72,59,.12); }
+.prayer-actions .btn-read:disabled { border-color: color-mix(in srgb, #D9483B 55%, transparent); }
 
 /* ── Кнопки ───────────────────────────────────────────────────────────── */
 .btn {
@@ -274,7 +285,7 @@ body::before {
 /* ── Калькулятор ──────────────────────────────────────────────────────── */
 .calc-result { display: flex; flex-direction: column; gap: 7px; margin-top: 6px; }
 .calc-row { display: flex; align-items: center; gap: 11px; padding: 10px 12px; border-radius: var(--radius-md); border: 1px solid var(--border); background: var(--bg-card); }
-.calc-row .prayer-ico { width: 30px; height: 30px; font-size: 16px; }
+.calc-row .prayer-ico { width: 30px; height: 30px; font-size: 16px; border-radius: 9px; }
 .calc-row-name { flex: 1 1 auto; font-weight: var(--fw-semibold); font-size: var(--text-sm); }
 .calc-row-val { font-family: var(--font-display); font-weight: var(--fw-bold); font-size: var(--text-md); font-variant-numeric: tabular-nums; }
 .calc-total { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; border-radius: var(--radius-md); background: color-mix(in srgb, var(--accent) 12%, transparent); border: 1px solid var(--highlight-border); font-family: var(--font-display); font-weight: var(--fw-bold); margin-top: 5px; font-size: var(--text-sm); }
