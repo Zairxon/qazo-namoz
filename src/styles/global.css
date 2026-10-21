@@ -180,7 +180,8 @@ body::before {
 }
 .prayer-actions .icon-btn { width: 34px; line-height: 1; padding: 0; color: #D9483B; font-size: 20px; }
 .prayer-actions .icon-btn:hover { border-color: #D9483B; color: #D9483B; background: rgba(217,72,59,.12); }
-.prayer-actions .btn-read:disabled { border-color: color-mix(in srgb, #D9483B 55%, transparent); }
+.prayer-actions .btn-read { border-color: #5FAE5B; color: #7CCB76; background: rgba(95,174,91,.14); }
+.prayer-actions .btn-read:hover { background: rgba(95,174,91,.26); }
 
 /* ── Кнопки ───────────────────────────────────────────────────────────── */
 .btn {
