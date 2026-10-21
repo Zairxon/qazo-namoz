@@ -178,8 +178,8 @@ body::before {
   height: 28px; min-height: 28px; box-sizing: border-box; margin: 0; padding-top: 0; padding-bottom: 0;
   border-radius: var(--radius-sm);
 }
-.prayer-actions .btn-read { border: 1.5px solid #5FAE5B; color: #000; background: #7CCB76; font-weight: var(--fw-bold); font-size: 12px; }
-.prayer-actions .btn-read:hover { background: #8AD684; }
+.prayer-actions .btn-read { border: 1.5px solid #5FAE5B; color: #000; background: rgba(124,203,118,.5); font-weight: var(--fw-bold); font-size: 12px; }
+.prayer-actions .btn-read:hover { background: rgba(124,203,118,.65); }
 .prayer-actions .icon-btn { width: 28px; line-height: 1; padding: 0; border: 1.5px solid #D9483B; color: #D9483B; font-size: 18px; }
 .prayer-actions .icon-btn:hover { border-color: #D9483B; color: #D9483B; background: rgba(217,72,59,.12); }
 
