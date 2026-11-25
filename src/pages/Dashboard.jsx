@@ -3,20 +3,26 @@ import Icon from '../components/Icon'
 import PrayerDetailModal from '../components/PrayerDetailModal'
 import AddEntryModal from '../components/AddEntryModal'
 import { useT } from '../lib/i18n'
+import { fmtDate } from '../lib/format'
 import {
-  useStore, PRAYERS, remainingByPrayer, totalRemaining,
+  useStore, PRAYERS, PRAYER_MAP, remainingByPrayer, totalRemaining,
   readEntry, readOneFromCount,
 } from '../lib/store'
 
-// «Прочитать один» по намозу: сначала самый ПОСЛЕДНИЙ добавленный отмеченный
-// намоз (с датой), а если таких нет — массовый счётчик из калькулятора.
+// Порядок намозов внутри дня: Бомдод → … → Хуфтон (для сортировки «последние сверху»).
+const ORDER = Object.fromEntries(['fajr', 'zuhr', 'asr', 'maghrib', 'isha', 'vitr'].map((id, i) => [id, i]))
+
+// Список каза: сверху самые поздние даты, внутри дня — Хуфтон, Шом, Аср, Пешин, Бомдод.
+function sortEntries(entries) {
+  return [...entries].sort((a, b) =>
+    b.date.localeCompare(a.date) || (ORDER[b.prayer] - ORDER[a.prayer]) || (b.createdAt - a.createdAt))
+}
+
+// «Прочитал» на карточке намоза = самый верхний в списке каза этого намоза
+// (самая поздняя дата); если отмеченных нет — массовый счётчик из калькулятора.
 function readOne(state, prayerId) {
-  const list = state.entries.filter(e => e.prayer === prayerId)
-  if (list.length) {
-    const newest = list.reduce((a, b) => (a.createdAt >= b.createdAt ? a : b))
-    readEntry(newest.id)
-    return
-  }
+  const list = sortEntries(state.entries.filter(e => e.prayer === prayerId))
+  if (list.length) { readEntry(list[0].id); return }
   if ((state.counts[prayerId] || 0) > 0) readOneFromCount(prayerId)
 }
 
@@ -27,6 +33,9 @@ export default function Dashboard({ onOpenCalc, onOpenJournal }) {
   const readCount = state.journal.length
   const [detail, setDetail] = useState(null)  // id намоза для модалки деталей
   const [addFor, setAddFor] = useState(null)  // id намоза для popup «+»
+  const sorted = sortEntries(state.entries)
+  // Массовый счёт из калькулятора (без дат) — внизу списка, Хуфтон → Бомдод.
+  const bulk = [...PRAYERS].reverse().filter(p => (state.counts[p.id] || 0) > 0)
 
   return (
     <div className="page">
@@ -79,6 +88,39 @@ export default function Dashboard({ onOpenCalc, onOpenJournal }) {
             </div>
           )
         })}
+      </div>
+
+      {/* Список каза: что и за какие даты пропущено; «Ўқидим» убирает запись из списка */}
+      <div className="section-header">
+        <h2 className="section-title"><Icon name="calendar" /> {t('list.title')}</h2>
+      </div>
+      <div className="entry-list qlist">
+        {sorted.map(e => {
+          const p = PRAYER_MAP[e.prayer]
+          return (
+            <div key={e.id} className="entry-card" style={{ '--pc-accent': p.color }}>
+              <div className="entry-ico"><Icon name={p.icon} /></div>
+              <div className="entry-main">
+                <div className="entry-title">{t('p.' + p.id)}{e.qasr && <span className="badge badge-qasr">{t('qasr.badge')}</span>}</div>
+                <div className="entry-meta"><Icon name="clock" /> {fmtDate(e.date)}</div>
+              </div>
+              <button className="btn btn-read btn-sm" onClick={() => readEntry(e.id)}><Icon name="check" /> {t('read')}</button>
+            </div>
+          )
+        })}
+        {bulk.map(p => (
+          <div key={'bulk-' + p.id} className="entry-card" style={{ '--pc-accent': p.color }}>
+            <div className="entry-ico"><Icon name={p.icon} /></div>
+            <div className="entry-main">
+              <div className="entry-title">{t('p.' + p.id)} <span className="qlist-count">× {state.counts[p.id]}</span></div>
+              <div className="entry-meta"><Icon name="calculator" /> {t('list.undated')}</div>
+            </div>
+            <button className="btn btn-read btn-sm" onClick={() => readOneFromCount(p.id)}><Icon name="check" /> {t('read')}</button>
+          </div>
+        ))}
+        {sorted.length === 0 && bulk.length === 0 && (
+          <div className="empty"><Icon name="calendar" /><div className="empty-title">{t('list.empty')}</div></div>
+        )}
       </div>
       <div className="spacer-lg" />
 

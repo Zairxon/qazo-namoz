@@ -15,9 +15,11 @@ export const PRAYERS = [
   { id: 'asr',     name: 'Asr',     arabic: 'Asr',        icon: 'sun-low',    rakat: 4, color: 'var(--gold)' },
   { id: 'maghrib', name: 'Shom',    arabic: 'Mag‘rib',    icon: 'sunset',     rakat: 3, color: 'var(--color-terracotta)' },
   { id: 'isha',    name: 'Xufton',  arabic: 'Isho',       icon: 'moon-stars', rakat: 4, color: 'var(--color-slate-blue)' },
-  { id: 'vitr',    name: 'Vitr',    arabic: 'Vitr vojib', icon: 'star',       rakat: 3, color: 'var(--color-olive)' },
 ]
-export const PRAYER_MAP = Object.fromEntries(PRAYERS.map(p => [p.id, p]))
+// Витр отдельно не ведём: он становится каза только вместе с Хуфтоном. В PRAYERS его нет
+// (карточки, итог, калькулятор), но в PRAYER_MAP оставлен — на случай старых записей.
+const VITR = { id: 'vitr', name: 'Vitr', arabic: 'Vitr vojib', icon: 'star', rakat: 3, color: 'var(--color-olive)' }
+export const PRAYER_MAP = Object.fromEntries([...PRAYERS, VITR].map(p => [p.id, p]))
 
 // Каср можно ставить только на 4-ракатные намозы (Пешин, Аср, Хуфтон) —
 // в пути они читаются в 2 раката. Бомдод/Шом/Витр не сокращаются.

@@ -359,3 +359,8 @@ body::before {
 .update-x { width: 28px; height: 28px; border: none; background: transparent; color: inherit; font-size: 18px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
 .ver-row { margin-top: 18px; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: var(--text-xs); color: var(--text-muted); }
 .ver-row .update-btn { color: var(--accent); }
+
+/* ── Список каза на главной ───────────────────────────────────────────── */
+.qlist .btn-read { height: 26px; min-height: 26px; padding: 0 10px; border: 1.5px solid #5FAE5B; border-radius: var(--radius-sm); background: rgba(124,203,118,.5); color: #000; font-weight: var(--fw-bold); font-size: 11.5px; }
+.qlist .btn-read:hover { background: rgba(124,203,118,.65); }
+.qlist-count { font-family: var(--font-base); font-size: var(--text-sm); font-weight: var(--fw-bold); color: var(--accent); }
