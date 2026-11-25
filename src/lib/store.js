@@ -16,16 +16,14 @@ export const PRAYERS = [
   { id: 'maghrib', name: 'Shom',    arabic: 'Mag‘rib',    icon: 'sunset',     rakat: 3, color: 'var(--color-terracotta)' },
   { id: 'isha',    name: 'Xufton',  arabic: 'Isho',       icon: 'moon-stars', rakat: 4, color: 'var(--color-slate-blue)' },
 ]
-// Витр отдельно не ведём: он становится каза только вместе с Хуфтоном. В PRAYERS его нет
-// (карточки, итог, калькулятор), но в PRAYER_MAP оставлен — на случай старых записей.
-const VITR = { id: 'vitr', name: 'Vitr', arabic: 'Vitr vojib', icon: 'star', rakat: 3, color: 'var(--color-olive)' }
-export const PRAYER_MAP = Object.fromEntries([...PRAYERS, VITR].map(p => [p.id, p]))
+// Витр отдельно не ведём: он становится каза только вместе с Хуфтоном.
+export const PRAYER_MAP = Object.fromEntries(PRAYERS.map(p => [p.id, p]))
 
 // Каср можно ставить только на 4-ракатные намозы (Пешин, Аср, Хуфтон) —
-// в пути они читаются в 2 раката. Бомдод/Шом/Витр не сокращаются.
+// в пути они читаются в 2 раката. Бомдод/Шом не сокращаются.
 export const QASR_ELIGIBLE = new Set(['zuhr', 'asr', 'isha'])
 
-const emptyCounts = () => ({ fajr: 0, zuhr: 0, asr: 0, maghrib: 0, isha: 0, vitr: 0 })
+const emptyCounts = () => ({ fajr: 0, zuhr: 0, asr: 0, maghrib: 0, isha: 0 })
 
 const DEFAULT_STATE = {
   counts: emptyCounts(),  // «массовые» каза (из калькулятора / ручного ввода)
@@ -39,11 +37,16 @@ function load() {
     const raw = localStorage.getItem(KEY)
     if (!raw) return structuredClone(DEFAULT_STATE)
     const parsed = JSON.parse(raw)
+    // Витр убран из приложения: чистим старые записи, журнал и счётчик.
+    const notVitr = x => x.prayer !== 'vitr'
+    const { vitr: _vitr, ...oldCounts } = parsed.counts || {}
     // Мягкое слияние с дефолтами — на случай новых полей в будущих версиях.
     return {
       ...DEFAULT_STATE,
       ...parsed,
-      counts: { ...emptyCounts(), ...(parsed.counts || {}) },
+      entries: (parsed.entries || []).filter(notVitr),
+      journal: (parsed.journal || []).filter(notVitr),
+      counts: { ...emptyCounts(), ...oldCounts },
       settings: { ...DEFAULT_STATE.settings, ...(parsed.settings || {}) },
     }
   } catch {

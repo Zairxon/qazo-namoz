@@ -10,7 +10,7 @@ import {
 } from '../lib/store'
 
 // Порядок намозов внутри дня: Бомдод → … → Хуфтон (для сортировки «последние сверху»).
-const ORDER = Object.fromEntries(['fajr', 'zuhr', 'asr', 'maghrib', 'isha', 'vitr'].map((id, i) => [id, i]))
+const ORDER = Object.fromEntries(['fajr', 'zuhr', 'asr', 'maghrib', 'isha'].map((id, i) => [id, i]))
 
 // Список каза: сверху самые поздние даты, внутри дня — Хуфтон, Шом, Аср, Пешин, Бомдод.
 function sortEntries(entries) {
