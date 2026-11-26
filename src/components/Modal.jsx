@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import Icon from './Icon'
 import { pushBack } from '../lib/backstack'
 import { useT } from '../lib/i18n'
@@ -14,7 +15,9 @@ export default function Modal({ title, onClose, children, footer }) {
     return () => { window.removeEventListener('keydown', h); popBack() }
   }, [onClose])
 
-  return (
+  // Портал в body: у .page есть transform (анимация появления), из-за него position:fixed
+  // считался от страницы, и на длинной странице окно уезжало вниз за экран.
+  return createPortal(
     <div className="modal-overlay" onClick={e => { if (e.target === e.currentTarget) onClose() }}>
       <div className="modal-box">
         <div className="modal-head">
@@ -24,6 +27,7 @@ export default function Modal({ title, onClose, children, footer }) {
         <div className="modal-body">{children}</div>
         {footer && <div className="modal-foot">{footer}</div>}
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
