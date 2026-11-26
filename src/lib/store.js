@@ -82,7 +82,15 @@ const todayISO = () => new Date().toISOString().slice(0, 10)
 // ── Мутации ─────────────────────────────────────────────────────────────
 
 // Добавить конкретный отмеченный намоз (кнопка «Қўшиш»).
+// Этот намаз за эту дату уже есть (в списке каза или уже прочитан в журнале)?
+export function hasEntryOn(s, prayer, date) {
+  return s.entries.some(e => e.prayer === prayer && e.date === date)
+    || s.journal.some(j => j.prayer === prayer && j.date === date)
+}
+
 export function addEntry({ prayer, date, qasr = false, note = '' }) {
+  // Два одинаковых каза за один день не добавляем.
+  if (hasEntryOn(state, prayer, date || todayISO())) return false
   const qasrOk = qasr && QASR_ELIGIBLE.has(prayer)
   state = {
     ...state,
@@ -92,6 +100,7 @@ export function addEntry({ prayer, date, qasr = false, note = '' }) {
     ],
   }
   emit()
+  return true
 }
 
 // Удалить отмеченный намоз без записи в журнал (ошибочно добавил).

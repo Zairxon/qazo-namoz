@@ -3,7 +3,7 @@ import Modal from './Modal'
 import Icon from './Icon'
 import DatePicker from './DatePicker'
 import { useT } from '../lib/i18n'
-import { PRAYER_MAP, QASR_ELIGIBLE, addEntry } from '../lib/store'
+import { useStore, PRAYER_MAP, QASR_ELIGIBLE, addEntry, hasEntryOn } from '../lib/store'
 
 const todayISO = () => new Date().toISOString().slice(0, 10)
 
@@ -15,8 +15,10 @@ export default function AddEntryModal({ prayer, onClose }) {
   const [date, setDate] = useState(todayISO())
   const [qasr, setQasr] = useState(false)
   const qasrOk = QASR_ELIGIBLE.has(prayer)
+  // Повтор: этот намаз за выбранную дату уже добавлен — предупреждаем и не даём сохранить.
+  const dup = useStore(s => hasEntryOn(s, prayer, date))
 
-  const save = () => { addEntry({ prayer, date, qasr: qasr && qasrOk }); onClose() }
+  const save = () => { if (!dup && addEntry({ prayer, date, qasr: qasr && qasrOk })) onClose() }
 
   return (
     <Modal
@@ -25,13 +27,14 @@ export default function AddEntryModal({ prayer, onClose }) {
       footer={
         <>
           <button className="btn btn-ghost" onClick={onClose}>{t('cancel')}</button>
-          <button className="btn btn-primary btn-block" onClick={save}><Icon name="plus" /> {t('add.btn')}</button>
+          <button className="btn btn-primary btn-block" onClick={save} disabled={dup}><Icon name="plus" /> {t('add.btn')}</button>
         </>
       }
     >
       <div className="fld">
         <label>{t('add.date')}</label>
         <DatePicker value={date} max={todayISO()} onChange={setDate} />
+        {dup && <div className="fld-error"><Icon name="info" /> {t('add.dup', { name: t('p.' + p.id) })}</div>}
       </div>
 
       <div className={'switch-row' + (qasrOk ? '' : ' disabled')} style={{ '--pc-accent': p.color }} onClick={() => qasrOk && setQasr(v => !v)}>
